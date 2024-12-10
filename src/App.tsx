@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ExpensesList from "./components/expensesList/components/ExpensesList";
 import ExpensesFilter from "./components/expensesList/components/ExpensesFilter";
+import ExpensesForm from "./components/expensesList/components/ExpensesForm";
+
+export const categoreis = ["Groceries", "Utilities", "Entertainment"];
 
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -15,6 +18,9 @@ const App = () => {
     : expenses;
   return (
     <>
+      <div className="mb-5">
+        <ExpensesForm />
+      </div>
       <div className="mb-3">
         <ExpensesFilter
           onSelectedCategory={(category) => setSelectedCategory(category)}
