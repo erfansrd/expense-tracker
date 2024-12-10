@@ -2,24 +2,28 @@ import { useState } from "react";
 import ExpensesList from "./components/expensesList/components/ExpensesList";
 import ExpensesFilter from "./components/expensesList/components/ExpensesFilter";
 import ExpensesForm from "./components/expensesList/components/ExpensesForm";
-
-export const categoreis = ["Groceries", "Utilities", "Entertainment"];
+import { Expense } from "./components/expensesList/components/ExpensesList";
 
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expenses, setExpenses] = useState([
-    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
-    { id: 2, description: "ccc", amount: 10, category: "Utilities" },
-    { id: 3, description: "bbb", amount: 10, category: "Utilities" },
-    { id: 4, description: "ggg", amount: 10, category: "Utilities" },
+    { id: 1, description: "", amount: 0, category: "" },
   ]);
   const visibleCategory = selectedCategory
     ? expenses.filter((e) => e.category === selectedCategory)
     : expenses;
+
+  const handleAddExpense = (newExpense: Expense) => {
+    setExpenses((prevExpenses) => [
+      ...prevExpenses,
+      { ...newExpense, id: prevExpenses.length + 1 },
+    ]);
+  };
+
   return (
     <>
       <div className="mb-5">
-        <ExpensesForm />
+        <ExpensesForm onSend={handleAddExpense} />
       </div>
       <div className="mb-3">
         <ExpensesFilter
